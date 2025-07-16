@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict Fraud</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 300px;
+        }
+
+        button {
+            padding: 5px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        h2 {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Check Transaction</h1>
+    <form action="/predict" method="post">
+        <label>Amount:</label><br>
+        <input type="number" name="amount" step="0.01" required><br>
+
+        <label>Client ID:</label><br>
+        <input type="number" name="client_id" required><br>
+
+        <label>Card ID:</label><br>
+        <input type="number" name="card_id" required><br>
+
+        <label>Merchant ID:</label><br>
+        <input type="number" name="merchant_id" required><br>
+
+        <label>Use Chip:</label><br>
+        <select name="use_chip">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select><br>
+
+        <label>Merchant State (as integer):</label><br>
+        <input type="number" name="merchant_state" required><br>
+
+        <label>ZIP Code:</label><br>
+        <input type="number" name="zip" required><br>
+
+        <label>Card Type (1 / 2 / 3):</label><br>
+        <input type="number" name="card_type" required><br>
+
+        <br><button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <h2>Prediction: {{ prediction }}</h2>
+    {% endif %}
+</body>
+</html>
